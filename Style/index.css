@@ -1,0 +1,116 @@
+*{
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+body{
+    font-family: 'Microsoft YaHei';
+    background: #efefef;
+}
+
+.wrap{
+    max-width: 800px;
+    margin:0px auto;
+    border:1px solid #ddd;
+}
+h1{
+    padding: 30px 0;
+    font-size: 28px;
+    text-align: center;
+    color: #646464;
+}
+.public-area{
+    height: 50px;
+    line-height: 50px;
+    text-indent: 15px;
+    color:#fff;
+    background: #42c02e;
+    position: relative;
+}
+.public-area h3{font-size: 22px;}
+.public-area a{
+    position: absolute;
+    right: 0;
+    top: 13px;
+    width: 35px;
+    display: block;
+}
+.public-area span{
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    float: left;
+    display: block;
+    background: #fff;
+}
+
+.items{
+    text-indent:15px;
+    background: #fff;
+}
+.items a{
+    color:#7f7f7f;
+}
+.items>li{
+    min-height: 40px;
+    line-height: 40px;
+}
+.items>li>a{
+    font-size: 16px;
+    line-height: 50px;
+    display: block;
+    background: #ffd3cf;
+}
+.items nav a{
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
