@@ -4,142 +4,53 @@
     <meta charset="UTF-8" />
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
     <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
-    <style type="text/css">
-        *{box-sizing:border-box;}
-        .wrap{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .activeArea,
-        .codeArea{
-            width: 50%;
-            height: inherit;
-            float: left;
-        }
-        .codeHideBtn{
-            font-size: 16px;
-            font-family: "SimHei";
-            color:#ccc;
-            position: absolute;
-            top:0%;
-            left: 50%;
-            height: 100%;
-            line-height: 60;
-            width: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition:all .8s;
-        }
-        .codeHideBtn:hover{
-            color:#fff;
-            background: #ccc;
-        }
-        .codeArea{border-left: 15px solid  #ececec;}
-        .codeArea div pre{
-            line-height: 25px;
-            overflow-y:scroll;
-            height: 86%;
-        }
-        .codeArea div{
-            position: relative;
-            width: 100%;
-            height: 33.333%;
-            border-bottom: 5px solid #ececec;
-        }
-        .codeArea div h3{
-            color:#7f7f7f;
-            height: 40px;
-            line-height: 40px;
-            text-indent: 20px;
-            border-bottom: 1px solid  #ececec;
-            box-shadow:0 0 5px #e8e8e8;
-            background: #fff;
-        }
-    </style>
 </head>
 <body>
 <div class="wrap">
     <div class="activeArea">
-
+        <div class="justifyAuto">
+            <form onsubmit="return false" role="form" id="form">
+                <label>
+                    Username:
+                    <input type="text" >
+                </label>
+                <label>
+                    Password:
+                    <input type="text" >
+                </label>
+                <button>提交</button>
+            </form>
+        </div>
     </div>
     <div class="codeArea">
         <span class="codeHideBtn">&gt;</span>
+        <!-- HTML Code Area -->
         <div class="code-area htmlArea">
             <h3>HTML Code</h3>
-            <pre class="language-css">
+            <pre class="language-*">
                 <code>
-                    <h3>HTML Code</h3>
+
                 </code>
             </pre>
         </div>
+        <!-- CSS Code Area -->
         <div class="code-area cssArea">
             <h3>CSS Code</h3>
             <pre class="language-css">
                 <code>
-                *{box-sizing:border-box;}
-                .wrap{
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                }
-                .activeArea,
-                .codeArea{
-                    width: 50%;
-                    height: inherit;
-                    float: left;
-                }
-                .codeHideBtn{
-                    font-size: 16px;
-                    font-family: "SimHei";
-                    color:#ccc;
-                    position: absolute;
-                    top:0%;
-                    left: 50%;
-                    height: 100%;
-                    line-height: 60;
-                    width: 15px;
-                    text-align: center;
-                    cursor: pointer;
-                    transition:all .8s;
-                }
-                .codeHideBtn:hover{
-                    color:#fff;
-                    background: #ccc;
-                }
-                .codeArea{border-left: 15px solid  #ececec;}
-                .codeArea div{
-                    position: relative;
-                    width: 100%;
-                    height: 33.333%;
-                    border-bottom: 5px solid #ececec;
-                    overflow-y:scroll;
-                }
-                .codeArea div h3{
-                    color:#7f7f7f;
-                    height: 40px;
-                    line-height: 40px;
-                    text-indent: 20px;
-                    border-bottom: 1px solid  #ececec;
-                    box-shadow:0 0 5px #e8e8e8;
-                }
+
                 </code>
             </pre>
         </div>
+        <!-- JavaScript Code Area -->
         <div class="code-area jsArea">
             <h3>JavaScript Code</h3>
-            <pre class="language-markup">
+            <pre class="language-*">
                 <code>
 
-                    <p class="hey">Type some code here</p>
-
                 </code>
-
             </pre>
         </div>
     </div>
@@ -148,12 +59,13 @@
 </html>
 <script src="../../Javascript/prism.js"></script>
 <script>
-/*var Dpre = document.querySelectorAll('pre');
-[].forEach.call(Dpre,function(el) {
-    console.log(el);
-    el.setAttribute('class',"prettyprint");
-    prettyPrint();
-})
-*/
-
+(function(){
+    var formArea = document.getElementById('form'),
+        formInput = formArea.getElementsByTagName('input');
+    for(var i =0;i<formInput.length;i++){
+        formInput[i].oncopy = formInput[i].onpaste = function(){
+            return false;
+        }
+    }
+}())
 </script>
