@@ -59,7 +59,7 @@ h1{
     color:#fff;
 }
 .items h2:hover{
-    background: rgba(101,234,80,.5);
+    background: #8cf77b;
 }
 .items h2{
     font-size: 16px;
@@ -73,7 +73,7 @@ h1{
 }
 .items dd a:hover{
     color:white;
-    background: rgba(101,234,80,.5);
+    background: #9aff8a;
 }
 
 
