@@ -13,7 +13,11 @@ body{
 .wrap{
     max-width: 800px;
     margin:0px auto;
-    border:1px solid #ddd;
+    background: #fff;
+    box-shadow: 0 0 10px #dfdfdf;
+}
+.hide{
+    display: none;
 }
 h1{
     padding: 30px 0;
@@ -37,14 +41,7 @@ h1{
     width: 35px;
     display: block;
 }
-.public-area span{
-    width: 10px;
-    height: 10px;
-    margin: 1px;
-    float: left;
-    display: block;
-    background: #fff;
-}
+
 
 .items{
     text-indent:15px;
@@ -56,15 +53,27 @@ h1{
 .items>li{
     min-height: 40px;
     line-height: 40px;
+    border-bottom: 1px solid  #dfdfdf;
 }
-.items>li>a{
+.items h2:hover a{
+    color:#fff;
+}
+.items h2:hover{
+    background: rgba(101,234,80,.5);
+}
+.items h2{
     font-size: 16px;
     line-height: 50px;
     display: block;
-    background: #ffd3cf;
+    cursor: pointer;
 }
-.items nav a{
+.items dd a{
     display: block;
+    text-indent: 2em;
+}
+.items dd a:hover{
+    color:white;
+    background: rgba(101,234,80,.5);
 }
 
 

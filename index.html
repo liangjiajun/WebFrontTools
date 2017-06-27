@@ -7,47 +7,96 @@
     <link rel="stylesheet" type="text/css" href="Style/index.css" />
 </head>
 <body>
-    <section class="wrap">
-        <header>
+    <div class="wrap">
+        <div class="header">
             <h1>Jason的前端工具包</h1>
             <div class="public-area">
                 <h3>前端效果</h3>
-                <a href="javascript:;" data-click="switchActive">
-                     <span></span>
-                     <span></span>
-                     <span></span>
-                     <span></span>
-                 </a>
             </div>
-        </header><!-- /header -->
-        <ul class="items">
+        </div><!-- /header -->
+        <ul class="items" id="items">
             <li>
-                <a href="javascript:;">常用表单效果</a>
-                <nav>
-                    <a href="#">asdf</a>
-                </nav>
+                <h2>
+                    <a href="javascript:;">常用表单效果</a>
+                </h2>
+                <dl class="hide">
+                    <dd>
+                        <a href="#">1、asdf</a>
+                    </dd>
+                </dl>
             </li>
             <li>
-                <a href="javascript:;">JavaScript效果</a>
-                <nav>
-                    <a href="#">asdf</a>
-                </nav>
+                <h2>
+                    <a href="javascript:;">JavaScript效果</a>
+                </h2>
+                <dl class="hide">
+                    <dd>
+                        <a href="#">1、asdf</a>
+                    </dd>
+                </dl>
             </li>
             <li>
-                <a href="javascript:;">CSS效果</a>
-                <nav>
-                    <a href="#">asdf</a>
-                </nav>
+                <h2>
+                    <a href="javascript:;">CSS效果</a>
+                </h2>
+                <dl class="hide">
+                    <dd>
+                        <a href="#">1、asdf</a>
+                    </dd>
+                </dl>
             </li>
             <li>
-                <a href="javascript:;">效率手册</a>
-                <nav>
-                    <a href="#">asdf</a>
-                </nav>
+                <h2>
+                    <a href="javascript:;">效率手册</a>
+                </h2>
+                <dl class="hide">
+                    <dd>
+                        <a href="#">1、asdf</a>
+                    </dd>
+                </dl>
             </li>
 
         </ul>
 
-    </section>
+    </div>
 </body>
 </html>
+<script>
+
+var list = function () {
+    this.open = true;
+    this.tmp = -1;
+}
+
+list.prototype = {
+    init:function () {
+        this._listData();
+    },
+    _listData:function () {
+        var that = this,
+            listTitle = document.getElementsByTagName('h2'),
+            listContent = document.getElementsByTagName('dl');
+
+        for (var i = 0; i < listTitle.length; i++) {
+            var listT = listTitle[i];
+            listT.onclick = function () {
+                for(var i = 0;i < listTitle.length; i++){
+                    listContent[i].className='hide';
+                }
+                this.nextElementSibling.className = '';
+            }
+        };
+    }
+}
+
+window.onload = function () {
+    var fun = new list();
+    fun.init();
+}
+
+
+
+
+
+
+</script>
