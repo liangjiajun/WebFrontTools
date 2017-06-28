@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3盒子变换</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+       *{margin:0; padding:0; list-style:none; font-family:Arial; transition:1s;}
+       .box {
+           height: 200px;
+           width: 200px;
+           margin: 20vh auto;
+           perspective: 400px;
+       }
+       .ul {
+           height: 100%;
+           width: 100%;
+           position: relative;
+           animation: test 3s linear infinite;
+           transform-style: preserve-3d;
+           margin-bottom: 50px;
+       }
+       [class*=li] {
+           line-height: 200px;
+           height: 100%;
+           width: 100%;
+           text-align: center;
+           font-size: 48px;
+           background: rgba(0, 0, 0, 0.1);
+           position: absolute;
+           top: 0;
+           left: 0;
+       }
+
+       /*result 1*/
+       .ul-1{transform-origin:100px 100px -100px; animation-duration:2s;}
+       [class*=li-1-]{transform-origin:100px 100px -100px;}
+       .li-1-0{transform:rotateX(90deg);}
+       .li-1-1{transform:rotateX(0deg);}
+       .li-1-2{transform:rotateX(270deg);}
+       .li-1-3{transform:rotateY(90deg);}
+       .li-1-4{transform:rotateY(180deg);}
+       .li-1-5{transform:rotateY(270deg);}
+       .li-1-6{transform:rotateX(90deg) scale(0.5) translateZ(-50px);}
+       .li-1-7{transform:rotateX(0deg) scale(0.5) translateZ(-50px);}
+       .li-1-8{transform:rotateX(270deg) scale(0.5) translateZ(-50px);}
+       .li-1-9{transform:rotateY(90deg) scale(0.5) translateZ(-50px);}
+       .li-1-10{transform:rotateY(180deg) scale(0.5) translateZ(-50px);}
+       .li-1-11{transform:rotateY(270deg) scale(0.5) translateZ(-50px);}
+
+       /*result 2*/
+       .ul-2{transform-origin:100px 100px -500px; animation-duration:6s}
+       [class*=li-2-]{transform-origin:100px 100px -500px;}
+       .li-2-0{transform:rotateY(30deg);}
+       .li-2-1{transform:rotateY(60deg);}
+       .li-2-2{transform:rotateY(90deg);}
+       .li-2-3{transform:rotateY(120deg);}
+       .li-2-4{transform:rotateY(150deg);}
+       .li-2-5{transform:rotateY(180deg);}
+       .li-2-6{transform:rotateY(210deg);}
+       .li-2-7{transform:rotateY(240deg);}
+       .li-2-8{transform:rotateY(270deg);}
+       .li-2-9{transform:rotateY(300deg);}
+       .li-2-10{transform:rotateY(330deg);}
+       .li-2-11{transform:rotateY(360deg);}
+
+       /*animation*/
+       @keyframes test{
+        to{transform:rotateY(-1turn);}
+       }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>CSS3盒子变换</h3>
+            <div class="box">
+                <ul class="ul ul-1">
+                    <li class="li-1-1">1</li>
+                    <li class="li-1-2">2</li>
+                    <li class="li-1-3">3</li>
+                    <li class="li-1-4">4</li>
+                    <li class="li-1-5">5</li>
+                    <li class="li-1-6">6</li>
+                    <li class="li-1-7">7</li>
+                    <li class="li-1-8">8</li>
+                    <li class="li-1-9">9</li>
+                    <li class="li-1-10">10</li>
+                    <li class="li-1-11">11</li>
+                    <li class="li-1-12">12</li>
+                </ul>
+                <button class="change" id="change">Change</button>
+            </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+    var Boxswitch = function () {
+        this.flag = true;
+        this.change = document.getElementById('change');
+    }
+    Boxswitch.prototype={
+        init:function () {
+            this._click();
+        },
+        _click:function () {
+            var that = this,
+                ulDom = document.getElementsByTagName('ul')[0],
+                liDom = ulDom.getElementsByTagName('li');
+            this.change.onclick=function () {
+                if(that.flag){
+                    that.flag = false;
+                    ulDom.className = 'ul ul-2';
+                    for (var i = 0; i < 12; i++) {
+                        liDom[i].className = 'li-2-'+i;
+                    };
+                }else{
+                    that.flag = true;
+                    ulDom.className = 'ul ul-1';
+                    for (var i = 0; i < 12; i++) {
+                        liDom[i].className = 'li-1-'+i;
+                    };
+                }
+            }
+        }
+    }
+
+    new Boxswitch().init();
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

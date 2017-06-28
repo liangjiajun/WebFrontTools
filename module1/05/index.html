@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传预览</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        img{
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>图片上传预览</h3>
+            <input type="file" id="file">
+            <div id="result"></div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+        var reader = new FileReader(),
+            file = document.getElementById("file"),
+            res = document.getElementById("result");
+            //判断浏览器是否支持FileReader
+            if(typeof FileReader==='undefined'){
+                result.innerHTML = "抱歉，你的浏览器不支持 FileReader";
+                file.setAttribute('disabled','disabled');
+            }else{
+                file.addEventListener('change',readtype);
+                //如果支持就监听改变事件，一旦改变了就运行readFile函数
+            }
+            function readtype(){
+                if(/image/.test(file.files[0].type)){   //判断是否为图片
+                    readAsDataURL();
+                }else{
+                    readAsText();
+                }
+            }
+
+            //将文件以Data URL形式读入页面
+            function readAsDataURL(){
+                reader.readAsDataURL(file.files[0]);
+                reader.onload=function(e){
+                    res.innerHTML = "<img src='"+this.result+"' alt=''>";
+                }
+            }
+
+            //以文本形式读入页面
+            function readAsText(){
+                reader.readAsText(file.files[0]);
+                reader.onload=function(e){
+                    res.innerHTML="抱歉，你上传的文件不是图片";
+                }
+            }
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

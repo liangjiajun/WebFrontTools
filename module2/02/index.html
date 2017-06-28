@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>360°轮播图</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        *{
+            transition:0.3s;
+        }
+        body {
+            background: #eee;
+        }
+        .box {
+            width: 480px;
+            margin: 30vh auto;
+            perspective: 1800px;
+        }
+        ul {
+            height: 270px;
+            width: 480px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform-origin: 240px 135px -540px;
+        }
+        li {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 240px 135px -540px;
+        }
+        li span{
+            display: block;
+            text-align: center;
+            font-size: 60px;
+            line-height: 270px;
+            width: 480px;
+            background: #4cd836;
+            opacity: .5;
+            color:#fff;
+        }
+        .li1 {
+            transform: rotateY(0deg);
+        }
+        .li2 {
+            transform: rotateY(60deg);
+        }
+        .li3 {
+            transform: rotateY(120deg);
+        }
+        .li4 {
+            transform: rotateY(180deg);
+        }
+        .li5 {
+            transform: rotateY(240deg);
+        }
+        .li6 {
+            transform: rotateY(300deg);
+        }
+        a {
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            line-height: 60px;
+            display: block;
+            background: #4cd836;
+            font-size: 40px;
+            outline: none;
+            margin: 20px 10px 0 10px;
+            font-family: 'SimHei';
+            color:#fff;
+            float: left;
+            cursor: pointer;
+
+        }
+        a:hover {
+            background: #000;
+            opacity: .5;
+        }
+        a:active {
+            background: #000;
+            opacity: .5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>CSS3 360°轮播图</h3>
+            <div class="box">
+                 <ul id="main">
+                    <li class="li1"><span>1</span></li>
+                    <li class="li2"><span>2</span></li>
+                    <li class="li3"><span>3</span></li>
+                    <li class="li4"><span>4</span></li>
+                    <li class="li5"><span>5</span></li>
+                    <li class="li6"><span>6</span></li>
+                 </ul>
+                 <a id="left">&lt;</a>
+                 <a id="right">&gt;</a>
+             </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+        window.onload = function(){
+            var left = document.getElementById("left");
+            var right = document.getElementById("right");
+            var main = document.getElementById("main");
+            var x = 0;
+            left.onclick = function(){
+                x++;
+                main.style.transform = "rotateY(" + x*60 + "deg)";
+            }
+            right.onclick = function(){
+                x--;
+                main.style.transform = "rotateY(" + x*60 + "deg)";
+            }
+        }
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

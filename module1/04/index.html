@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>三级联动菜单</title>
+	<link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+	<link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+	<style id="cssCode">
+		select{
+			width: 100px;
+			height: 25px;
+		}
+	</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>三级联动菜单</h3>
+            <form onsubmit="return false">
+              省：
+              <select  id="province" onchange="chg(this)">
+              		<option value="-1">请选择</option>
+              </select>
+              市：
+              <select  id="city" onchange="chg1(this)">
+              </select>
+              区：
+              <select id="area">
+              </select>
+            </form>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+	function getId(a){
+		return document.getElementById(a);
+	}
+	var provId = getId("province"),
+		cityId = getId("city"),
+		areaId = getId("area"),
+		pIndex = -1;
+	var prov = ["广东省","广西省","湖南省"];
+	var city = [
+		["广州市","佛山市","中山市"],
+		["南宁市","桂林市","北海市"],
+		["长沙市","衡阳市","岳阳市"]
+	];
+	var area = [
+		[
+			["广州市1","广州市2","广州市3"],
+			["佛山市1","佛山市2","佛山市3"],
+			["中山市1","中山市2","中山市3"]
+		],
+		[
+			["南宁市1","南宁市2","南宁市3"],
+			["桂林市1","桂林市2","桂林市3"],
+			["北海市1","北海市2","北海市3"]
+		],
+		[
+			["长沙市1","长沙市2","长沙市3"],
+			["衡阳市1","衡阳市2","衡阳市3"],
+			["岳阳市1","岳阳市2","岳阳市3"]
+		]
+	]
+	for(var i=0;i<prov.length;i++){
+		var op = new Option(prov[i],i);
+		provId.options.add(op);
+	}
+	function chg(obj){
+		if(obj.value == -1){
+			cityId.options.length = 0;
+			areaId.options.length = 0;
+		}else{
+			cityId.options.length = 0;
+			areaId.options.length = 0;
+			var value = obj.value;
+				pIndex = obj.value;
+			var cs = city[value];
+
+			for(var i=0;i<cs.length;i++){
+				var op = new Option(cs[i],i);
+				cityId.options.add(op)
+			}
+
+			var ar = area[value][0];
+			for(var i=0;i<ar.length;i++){
+				var op = new Option(ar[i],i);
+				areaId.options.add(op);
+			}
+		}
+	}
+	function chg1(obj){
+		var val = obj.value;
+		var ar = area[pIndex][val];
+		console.log(pIndex)
+		areaId.options.length = 0;
+		for(var i=0;i<ar.length;i++){
+			var op = new Option(ar[i],i);
+			areaId.options.add(op);
+		}
+	}
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

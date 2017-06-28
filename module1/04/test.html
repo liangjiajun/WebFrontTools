@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq城市三级联动</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style id="cssCode">
+
+    </style>
+</head>
+<body>
+ <div class="wrap">
+     <div class="activeArea" id="activeArea">
+         <div class="justifyAuto">
+             <h3>jq城市三级联动</h3>
+             <select name="province" id="province">
+                 <option value="">省份</option>
+             </select>
+             <select name="city" id="city">
+                 <option value="">地级市</option>
+             </select>
+             <select name="districtAndCounty" id="districtAndCounty">
+                 <option value="">市、县级市</option>
+             </select>
+         </div>
+     </div>
+     <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+     <div class="codeArea" id="codeArea">
+         <div class="code-area">
+             <h3>HTML Code </h3>
+             <pre class="language-html">
+                 <code>
+                     <textarea disabled  id="htmlArea">
+
+                     </textarea>
+                 </code>
+             </pre>
+         </div>
+         <div class="code-area">
+             <h3>CSS Code </h3>
+             <pre class="language-css">
+                 <code>
+                     <textarea disabled  id="cssArea">
+
+                     </textarea>
+                 </code>
+             </pre>
+         </div>
+         <div class="code-area" >
+             <h3>JavaScript Code </h3>
+             <pre class="language-javascript">
+                 <code>
+                     <textarea disabled id="jsArea">
+
+                     </textarea>
+                 </code>
+             </pre>
+         </div>
+     </div>
+ </div>
+<script id="jsCode">
+    var province=[
+        {
+            name:"北京市",
+            city:[
+                {
+                    name:"北京市",
+                    districtAndCounty:["东城区","西城区","崇文区","宣武区","朝阳区","丰台区","石景山区","海淀区","门头沟区","房山区","通州区","顺义区","昌平区","大兴区","怀柔区","平谷区","密云县","延庆县","延庆镇"]
+                }
+            ]
+        },
+        {
+            name:"天津市",
+            city:[
+                {
+                    name:"天津市",
+                    districtAndCounty:["和平区","河东区","河西区","南开区","河北区","红桥区","塘沽区","汉沽区","大港区","东丽区","西青区","津南区","北辰区","武清区","宝坻区","蓟县","宁河县","芦台镇","静海县","静海镇"]
+                }
+            ]
+        },
+        {
+            name:"上海市",
+            city:[
+                {
+                    name:"上海市",
+                    districtAndCounty:["黄浦区","卢湾区","徐汇区","长宁区","静安区","普陀区","闸北区","虹口区","杨浦区","闵行区","宝山区?","嘉定区","浦东新区","金山区","松江区","青浦区","南汇区","奉贤区","崇明县","城桥镇"]
+                }
+            ]
+        },
+        {
+            name:"广东省",
+            city:[
+                {
+                    name:"广州市",
+                    districtAndCounty:["越秀区","荔湾区","海珠区","天河区","白云区","黄埔区","番禺区","花都区","南沙区","萝岗区","增城市","从化市"]
+                },
+                {
+                    name:"深圳市",
+                    districtAndCounty:["福田区","罗湖区","南山区","宝安区","龙岗区","盐田区"]
+                },
+                {
+                    name:"清远市",
+                    districtAndCounty:["清城区","英德市","连州市","佛冈县","石角镇","阳山县","阳城镇","清新县","太和镇","连山壮族瑶族自治县","吉田镇","连南瑶族自治县","三江镇"]
+                },
+                {
+                    name:"韶关市",
+                    districtAndCounty:["浈江区","武江区","曲江区","乐昌市","南雄市","始兴县","太平镇","仁化县","仁化镇","翁源县","龙仙镇","新丰县","乳源瑶族自治县","乳城镇"]
+                },
+                {
+                    name:"河源市",
+                    districtAndCounty:["源城区","紫金县","紫城镇","龙川县","老隆镇","连平县","元善镇","和平县","阳明镇","东源县","仙塘镇"]
+                },
+                {
+                    name:"梅州市",
+                    districtAndCounty:["梅江区","兴宁市","梅县","程江镇","大埔县","湖寮镇","丰顺县","汤坑镇","五华县","水寨镇","平远县","大柘镇","蕉岭县","蕉城镇"]
+                },
+                {
+                    name:"潮州市",
+                    districtAndCounty:["湘桥区","潮安县","庵埠镇","饶平县","黄冈镇"]
+                },
+                {
+                    name:"汕头市",
+                    districtAndCounty:["金平区","濠江区","龙湖区","潮阳区","潮南区","澄海区","南澳县","后宅镇"]
+                },
+                {
+                    name:"揭阳市",
+                    districtAndCounty:["榕城区","普宁市","揭东县","曲溪镇","揭西县","河婆镇","惠来县","惠城镇"]
+                },
+                {
+                    name:"汕尾市",
+                    districtAndCounty:["城区","陆丰市","海丰县","海城镇","陆河县","河田镇"]
+                },
+                {
+                    name:"惠州市",
+                    districtAndCounty:["惠城区","惠阳区","博罗县","罗阳镇","惠东县","龙门县"]
+                },
+                {
+                    name:"东莞市",
+                    districtAndCounty:[]
+                },
+                {
+                    name:"珠海市",
+                    districtAndCounty:["香洲区","斗门区","金湾区"]
+                },
+                {
+                    name:"中山市",
+                    districtAndCounty:[]
+                },
+                {
+                    name:"江门市",
+                    districtAndCounty:["江海区","蓬江区","新会区","恩平市","台山市","开平市","鹤山市"]
+                },
+                {
+                    name:"佛山市",
+                    districtAndCounty:["禅城区","南海区","顺德区","三水区","高明区"]
+                },
+                {
+                    name:"肇庆市",
+                    districtAndCounty:["端州区","鼎湖区","高要市","四会市","广宁县","南街镇","怀集县","怀城镇","封开县","江口镇","德庆县"]
+                },
+                {
+                    name:"云浮市",
+                    districtAndCounty:["云城区","罗定市","云安县","六都镇","新兴县","新城镇","郁南县","都城镇"]
+                },
+                {
+                    name:"阳江市",
+                    districtAndCounty:["江城区","阳春市","阳西县","织镇","阳东县","东城镇"]
+                },
+                {
+                    name:"茂名市",
+                    districtAndCounty:["茂南区","茂港区","化州市","信宜市","高州市","电白县","水东镇"]
+                },
+                {
+                    name:"湛江市",
+                    districtAndCounty:["赤坎区","霞山区","坡头区","麻章区","吴川市","廉江市","雷州市","遂溪县","遂城镇","徐闻县"]
+                }
+            ]
+        },
+    ];
+
+    $(function(){
+        var pro=$("#province");
+        var city=$("#city");
+        var dAC=$("#districtAndCounty");
+        var num1=null;
+        var num2=null;
+        init();
+        pro.change(function(){
+            num1=pro.prop("selectedIndex");
+            city.find("option").eq(0).siblings().remove();
+            dAC.find("option").eq(0).siblings().remove();
+            if(num1!==0){
+                for(var i=0;i<province[num1-1].city.length;i++){
+                    var $temp=$("<option value=\"\">"+province[num1-1].city[i].name+"</option>");
+                    city.append($temp);
+                }
+            }
+        });
+        city.change(function(){
+            num2=city.prop("selectedIndex");
+            dAC.find("option").eq(0).siblings().remove();
+            if(num2!==0){
+                for(var i=0;i<province[num1-1].city[num2-1].districtAndCounty.length;i++){
+                    var $temp=$("<option value=\"\">"+province[num1-1].city[num2-1].districtAndCounty[i]+"</option>");
+                    dAC.append($temp);
+                }
+            }
+        })
+    });
+
+    function init(){
+        var pro=$("#province");
+        for(var i=0;i<province.length;i++){
+            var $temp=$("<option value=\"\">"+province[i].name+"</option>");
+            pro.append($temp);
+        }
+    }
+</script>
+</body>
+</html>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

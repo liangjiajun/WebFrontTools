@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3 绘制各种图形</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style type="text/css" id="cssCode">
+        .margin{ position: relative; margin: 20px auto; }
+        /*square*/
+        #square{ width: 0; height: 0; border-width: 40px; border-style: solid; border-color: red green blue orange;}
+        /*triangle*/
+        .tri{ width: 0px; height: 0px; border-width: 25px; border-style: solid; }
+        .triangle{ width: 100px; }
+        .triangle-top{ border-color: transparent; border-top-color: red; }
+        .triangle-right{ border-color: transparent; border-right-color: red; }
+        .triangle-bottom{ border-color: transparent; border-bottom-color: red; }
+        .triangle-left{ border-color: transparent; border-left-color: red; }
+        /*hexagon*/
+        .hexagon{ width: 100px; height: 55px; background: red; position: relative; margin: 50px auto; }
+        #hex-top,#hex-bottom{ position: absolute; left: 0; width: 0; height: 0; border: 50px solid transparent; }
+        #hex-top{ top: -75px; border-bottom: 25px solid red; }
+        #hex-bottom{ top: 55px; border-top: 25px solid red; }
+        /*Yin-yang*/
+        .yy{ width: 96px; height: 96px; background: #eee; border: 2px solid red; border-bottom-width: 50px; border-radius: 50%; position: relative; }
+        #y1, #y2{ position: absolute; top: 59%; border: 23px solid red; border-radius: 50%; width: 12px; height: 12px; }
+        #y1{ left: 0; background: #eee; }
+        #y2{ left: 50%; background: red; border-color: #eee; }
+        /*pacman*/
+        .pacman{ width: 0; height: 0; border: 60px solid red; border-right-color: transparent; border-radius: 50%; }
+        /*egg*/
+        .egg{ width: 126px; height: 180px; background: red; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+        /*infinity*/
+        .infinity{ position: relative; width: 116px; height: 100px; }
+        #infin1, #infin2{ position: absolute; top: 0; width: 60px; height: 60px; border: 20px solid red; }
+        #infin1{ left: 0; border-radius: 50px 50px 0 50px; transform: rotate(-45deg); }
+        #infin2{ right: 0; border-radius: 50px 50px 50px 0; transform: rotate(45deg); }
+        /*heart*/
+        .heart{ position: relative; width: 100px; height: 90px; margin-bottom: 150px; }
+        #hea-l, #hea-r{ position: absolute; top: 0; left: 50px; width: 100px; height: 160px; background: red; border-radius: 50px 50px 0 0; transform: rotate(-45deg); transform-origin: 0 100%; }
+        #hea-r{ left: -50px; transform: rotate(45deg); transform-origin: 100% 100%; }
+        /*pengtagon*/
+        .pengtagon{ position: relative; width: 89px; border-width: 50px 18px 0; border-style: solid; border-color: red transparent; margin-top: 60px; }
+        #peng{ position: absolute; width: 0; height: 0; top: -85px; left: -18px; border-width: 0 45px 35px; border-style: solid; border-color: transparent transparent red; }
+        /*star - five*/
+        .star-five{ width: 0; height: 0; position: relative; margin: 100px auto; transform: rotate(35deg); border: 100px solid transparent; border-top: 0; border-bottom: 70px solid red; }
+        #star-1{ width: 0; height: 0; position: absolute; transform: rotate(-35deg); top: -56px; left: -65px; border: 30px solid transparent; border-bottom: 80px solid red; border-top: 0; }
+        #star-2{ width: 0; height: 0; position: absolute; top: -6px; left: -100px; border: 100px solid transparent; border-bottom: 70px solid red; border-top: 0; transform: rotate(-70deg); }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>CSS3 绘制各种图形</h3>
+              <!-- 正方形 English : square -->
+              <div class="margin" id="square"></div>
+              <!-- 三角形 English : Triangle -->
+              <div class="triangle margin">
+                  <div class="tri triangle-top">上</div>
+                  <div class="tri triangle-right">右</div>
+                  <div class="tri triangle-bottom">下</div>
+                  <div class="tri triangle-left">左</div>
+              </div>
+              <p>然后来看看下面这个六边形</p>
+              <!-- 六边形 English ：hexagon -->
+              <div class="hexagon margin">
+                  <div id="hex-top"></div>
+                  <div id="hex-bottom"></div>
+              </div>
+              <button id="break">拆分六边形的结构</button>
+              <!-- 这是阴阳 -->
+              <div class="yy margin">
+                  <div id="y1"></div>
+                  <div id="y2"></div>
+              </div>
+              <button id="break2">拆分太极的结构</button>
+              <!-- 这是吃豆人 English : pacman -->
+              <div class="pacman margin"></div>
+              <!-- 鸡蛋 English : egg -->
+              <div class="egg margin"></div>
+              <!-- 无穷大 English : infinity -->
+              <div class="infinity margin">
+                  <div id="infin1"></div>
+                  <div id="infin2"></div>
+              </div>
+              <button id="break4">拆分无穷大的结构</button>
+              <!-- 爱心 English : heart -->
+               <div class="heart margin">
+                  <div id="hea-l"></div>
+                  <div id="hea-r"></div>
+               </div>
+              <button id="break5">把爱心变成水管转角</button>
+              <button id="break6">拆分爱心的结构</button>
+              <!-- 五角大楼 English : pentagon -->
+              <div class="pengtagon margin">
+                  <div id="peng"></div>
+              </div>
+              <button id="break7">拆分五边形的结构</button>
+              <!-- 五角星 English : star - five -->
+              <div class="star-five margin">
+                  <div id="star-1"></div>
+                  <div id="star-2"></div>
+              </div>
+              <button id="break8">拆分五角星的结构</button>
+
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+
+
+<script id="jsCode">
+
+    // hexagon
+    document.getElementById('break').addEventListener('click',function(){
+        document.getElementById('hex-top').style.top = "-115px";
+        document.getElementById('hex-bottom').style.top = "55px";
+    })
+    // Yin-yang
+    document.getElementById('break2').addEventListener('click',function(){
+        document.getElementById('y1').style.left = "-60%";
+        document.getElementById('y2').style.left = "110%";
+        document.getElementById('y2').style.boxShadow = "0 0 2px 2px #000";
+    })
+
+    // infinity
+    document.getElementById('break4').addEventListener('click',function(){
+        document.getElementById('infin1').style.left = "-40px";
+        document.getElementById('infin2').style.right = "-40px";
+    })
+    // heart
+    document.getElementById('break5').addEventListener('click',function(){
+        document.getElementById('hea-l').style.left = "100px";
+        document.getElementById('hea-r').style.left = "-100px";
+    })
+    document.getElementById('break6').addEventListener('click',function(){
+        document.getElementById('hea-l').style.left = "-50px";
+        document.getElementById('hea-r').style.left = "50px";
+    })
+    // pentagon
+    document.getElementById('break7').addEventListener('click',function(){
+        document.getElementById('peng').style.top = "-135px";
+    })
+    // star-five
+    document.getElementById('break8').addEventListener('click',function(){
+        document.getElementById('star-1').style.top = "-100px";
+        document.getElementById('star-1').style.left = "-100px";
+        document.getElementById('star-2').style.left = "-270px";
+        document.getElementById('star-2').style.top = "98px";
+    })
+
+
+
+
+
+</script>
+
+</body>
+</html>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

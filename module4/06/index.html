@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单页面导航点击切换</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        ul{width: 640px;}
+        li{float: left;text-align: center;background: #000;width: 20%;}
+        a{text-decoration: none;width: 100%;line-height: 30px;display: block;color:#fff;}
+        a:hover{background: #738f00;}
+        #box{margin-top: 50px;}
+        #box div{
+            background: #738f00;
+            text-align: center;
+            font-size: 80px;
+            color:#fff;
+        }
+        #box div:nth-child(2n){
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>单页面导航点击切换</h3>
+            <ul>
+                <li><a href="javascript:;">nav1</a></li>
+                <li><a href="javascript:;">nav2</a></li>
+                <li><a href="javascript:;">nav3</a></li>
+                <li><a href="javascript:;">nav4</a></li>
+                <li><a href="javascript:;">nav5</a></li>
+            </ul>
+           <div id="box">
+               <div id="section1">1</div>
+               <div id="section2">2</div>
+               <div id="section3">3</div>
+               <div id="section4">4</div>
+               <div id="section5">5</div>
+           </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+var box = document.getElementById('box');
+var sectionHeight = box.getElementsByTagName('div');
+var ul = document.getElementsByTagName('ul')[0];
+var list = ul.getElementsByTagName('li');
+var get = [];
+var i = 0;
+var ftime;
+
+heightDom(sectionHeight);
+window.onresize = function () {heightDom(sectionHeight);}
+
+for (var i = 0; i < list.length; i++) {
+    list[i].index=i;
+    list[i].onclick = function () {
+        menu(this.index);
+    }
+};
+
+function heightDom (value) {
+     for (var i = 0; i < value.length; i++) {
+        var bodyHeight = document.documentElement.clientHeight;
+        value[i].style.cssText = 'height:'+bodyHeight+'px;line-height:'+bodyHeight+'px';
+        get[i] = value[i].offsetTop;
+    };
+}
+
+function menu(i){
+    clearInterval(ftime);
+    ftime = setInterval(function(){
+        var scr = document.body.scrollTop || document.documentElement.scrollTop;
+        var b = document.body.offsetHeight-window.innerHeight;
+        if(scr<=get[i]){
+            if(scr>=get[i] || scr==b){clearInterval(ftime);}
+            window.scroll(0,scr=Math.ceil(scr+(get[i]-scr)/60));
+        }else{
+            if(scr==0){clearInterval(ftime);}
+            window.scroll(0,scr=Math.floor(scr-=scr/60));
+        }
+    },10);
+}
+
+
+
+
+
+
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

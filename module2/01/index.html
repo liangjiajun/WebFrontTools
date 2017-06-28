@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮换图片-单个滚动</title>
+	<link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+	<link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+	<style id="cssCode">
+		#sliderWrap {
+        margin:0 auto;
+        width: 100%;
+        max-width: 414px;
+        height: 160px;
+        position: relative;
+        font-size: 0;
+        overflow: hidden;
+    }
+
+    #sliderWrap .slider-content {
+        width: 500%;
+        height: 100%;
+        transition: 0.5s;
+        margin: 0;
+        padding: 0;
+    }
+
+    #sliderWrap .slider-content li {
+        width: 20%;
+        height: 100%;
+        list-style: none;
+        display: inline-block;
+    }
+
+    #sliderWrap .slider-content li img {
+        width: 100%;
+        height: 100%;
+        vertical-align: top;
+    }
+
+    #sliderWrap .slider-flag {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        bottom: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+    }
+
+    #sliderWrap .slider-flag li {
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        background-color: green;
+        display: inline-block;
+        margin: 0 4px;
+    }
+
+    #sliderWrap .slider-flag li.active {
+        background-color: red;
+    }
+
+	</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>轮换图片-单个滚动</h3>
+			<div id="sliderWrap">
+                   <ul class="slider-content">
+                       <li>
+                           <a href="javascript:;"><img src="http://qiniu.xiaochedong.com/prod/banner/r30.jpg" alt=""></a>
+                       </li>
+                       <li>
+                           <a href="javascript:;"><img src="http://qiniu.xiaochedong.com/prod/tpl/22/main.png" alt=""></a>
+                       </li>
+                       <li>
+                           <a href="javascript:;"><img src="http://qiniu.xiaochedong.com/prod/tpl/16/main.png" alt=""></a>
+                       </li>
+                       <li>
+                           <a href="javascript:;"><img src="http://qiniu.xiaochedong.com/prod/tpl/20/main.png" alt=""></a>
+                       </li>
+                   </ul>
+                   <ul class="slider-flag">
+                       <li class="active"></li>
+                       <li></li>
+                       <li></li>
+                       <li></li>
+                   </ul>
+               </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script id="jsCode">
+function moblieSlider(el, json) {
+    this.element = el;
+    this.json = json || {};
+    this.sliderWrap = null;
+    this.sliderContent = null;
+    this.sliderFlag = null;
+    this.index = 0;
+    this.iWidth = null;
+    this.length = null;
+    this.settings = {
+        sliderWrap: '', //轮播图id
+        auto: 1, //自动播放 1或0
+        interval: 3000, //** 停顿时间
+        imgurl: '' //图片地址
+    };
+    this.init_data();
+}
+
+moblieSlider.prototype = {
+    init_data: function() { //初始化数据
+        this.get_element();
+        this.settings.auto === 1 && this.auto_play();
+    },
+    get_element: function() { //获取元素对象
+        var self = this;
+        this.sliderWrap = document.querySelector(this.element);
+        this.sliderContent = this.sliderWrap.querySelectorAll('ul')[0];
+        this.sliderContent.innerHTML += this.sliderContent.innerHTML;
+        this.sliderFlag = this.sliderWrap.querySelectorAll('ul')[1];
+        this.iWidth = this.sliderWrap.offsetWidth;
+        this.length = this.sliderContent.children.length;
+        this.sliderContent.style.width = this.length + '00%';
+        Array.prototype.slice.call(this.sliderContent.children).forEach(function(element, index) {
+            element.style.width = 1 / self.length * 100 + '%';
+        });
+        for (var attr in this.json) { //设置的参数代替默认的参数
+            this.settings[attr] = this.json[attr];
+        }
+    },
+
+    auto_play: function() { //自动播放
+        var self = this;
+        clearInterval(this.autotimer);
+        this.autotimer = setInterval(function() {
+            self.index++;
+            self.sliderContent.style.transition = ".5s";
+            self.set_position(self.sliderContent, -self.index * self.iWidth);
+            self.set_focusIcon(self.sliderFlag, self.index % (self.length / 2));
+            setTimeout(function() {
+                if (self.index === self.length - 1) {
+                    self.sliderContent.style.transition = "none";
+                    self.index = self.length / 2 - 1;
+                    self.set_position(self.sliderContent, -self.index * self.iWidth);
+                }
+            }, 600);
+        }, this.settings.interval);
+    },
+
+
+
+    set_position: function(obj, distance) { //更改轮播图位置
+        obj.style["webkitTransform"] = "translate3d(" + distance + "px, 0, 0)";
+        obj.style["transform"] = "translate3d(" + distance + "px, 0, 0)";
+    },
+
+    set_focusIcon: function(obj, x) { //设置轮播图ICON焦点
+        for (var i = 0; i < obj.children.length; i++) {
+            obj.children[i].className = '';
+        }
+        obj.children[x].className = 'active';
+    }
+}
+
+
+
+  new moblieSlider('#sliderWrap');
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>js多选和反选</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode"></style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+             <h3>js多选和反选</h3>
+            <form onsubmit="return false" role="form" id="form">
+                <p><label><input type="checkbox" id="all">全选</label></p>
+                <p><label><input name="obj" type="checkbox">选项一</label></p>
+                <p><label><input name="obj" type="checkbox">选项二</label></p>
+                <p><label><input name="obj" type="checkbox">选项三</label></p>
+                <p><label><input name="obj" type="checkbox">选项四</label></p>
+                <p><label><input name="obj" type="checkbox">选项五</label></p>
+                <p><label><input name="obj" type="checkbox">选项六</label></p>
+                <p><label><input name="obj" type="checkbox">选项七</label></p>
+                <p><label><input name="obj" type="checkbox">选项八</label></p>
+                <p><label><input name="obj" type="checkbox">选项九</label></p>
+                <p><label><input name="obj" type="checkbox">选项十</label></p>
+            </form>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-*">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-*">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script id="jsCode">
+(function(){
+    var allInput = document.getElementById('all');
+    var check = document.getElementsByName('obj');
+
+var each = function (arr,callback) {
+    var len = arr.length;
+    for (var i = 0; i < len; i++) {
+        if(callback.call(arr[i],i,arr[i])===false){
+            break;
+        }
+    };
+    return arr;
+}
+allInput.onclick = function () {
+    if(allInput.checked==true){
+        each(check,function (i) {
+            check[i].checked = true;
+        })
+    }else{
+        each(check,function (i) {
+            check[i].checked = false;
+        })
+    }
+}
+
+
+
+
+
+}())
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

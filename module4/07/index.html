@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回顶部</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        body{height: 3000px;}
+        .justifyAuto{text-align: center;}
+        a{
+          position: fixed;
+          right: 55%;
+          bottom: 100px;
+          width: 80px;
+          line-height: 80px;
+          text-decoration: none;
+          display: none;
+          background: #ccc;
+          border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>返回顶部</h3>
+            <p>滚动条滚动到第一屏后返回顶部按钮才会显示</p>
+            <a href="javascript:;" id="top">返回顶部</a>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+var topBtn = document.getElementById('top');
+var ftime;
+window.onscroll = function() {
+  var scr = document.body.scrollTop || document.documentElement.scrollTop;
+  if(scr>=400){
+    topBtn.style.cssText = 'display:block;';
+    topBtn.onclick = function () {backtop();}
+  }else{
+    topBtn.style.cssText = 'display:none;';
+
+  }
+}
+
+function backtop(){
+  clearInterval(ftime);
+  ftime = setInterval(function(){
+    var scr = document.body.scrollTop || document.documentElement.scrollTop;
+    if(scr==0){clearInterval(ftime);}
+    window.scroll(0,scr=Math.floor(scr-=scr/80));
+  },10);
+}
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

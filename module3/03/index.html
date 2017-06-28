@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3高级选择器</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+    .box {
+        width: 500px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 30px;
+
+        padding-bottom: 100px;
+    }
+
+    h1 {
+        margin-top: 100px;
+    }
+
+    .list {
+        height: 100px;
+        margin: 50px 0 20px;
+    }
+
+    .list>li {
+        line-height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        float: left;
+        background: #000000;
+        color: #FFFFFF;
+        margin: 10px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /*第x个*/
+    .list-1>li:nth-child(3){background:#FF0000;}
+    /*倒数第x个*/
+    /*.list-1>li:nth-last-child(8){background:#FF0000;}*/
+
+
+    /*2n n=0,1,2... 2n=0,2,4...（偶数）*/
+    .list-2>li:nth-child(2n){background:#FF0000;}
+    /*偶数*/
+    /*.list-2>li:nth-child(even){background:#FF0000;}*/
+    /*倒数奇数*/
+    /*.list-2>li:nth-last-child(odd){background:#FF0000;}*/
+
+
+    /*2n+1 2n=偶数 2n+1=偶数+1（奇数）*/
+    .list-3>li:nth-child(2n+1){background:#FF0000;}
+    /*奇数*/
+    /*.list-3>li:nth-child(odd){background:#FF0000;}*/
+    /*倒数偶数*/
+    /*.list-2>li:nth-last-child(even){background:#FF0000;}*/
+
+    /*xn+y 以x个划分 第y个*/
+    .list-4>li:nth-child(3n+2){background:#FF0000;}
+
+
+    /*n=0,1,2... n+6=6,7,8... 从第6个开始*/
+    .list-5>li:nth-child(n+6){background:#FF0000;}
+    /*倒数5以内*/
+    /*.list-4>li:nth-last-child(-n+5){background:#FF0000;}*/
+
+
+    /*5以内*/
+    .list-6>li:nth-child(-n+5){background:#FF0000;}
+    /*倒数第6个开始*/
+    /*.list-5>li:nth-last-child(n+6){background:#FF0000;}*/
+
+
+    /*3-7*/
+    .list-7>li:nth-child(n+3):nth-child(-n+7){background:#FF0000;}
+
+
+    /*[attr=value]attr等于value*/
+    .list-8>li[class=test]{background:#FF0000;}
+
+
+    /*[attr*=value]attr中含有value*/
+    .list-9>li[class*=test]{background:#FF0000;}
+
+
+    /*[attr^=value]attr开头含有value*/
+    .list-10>li[class^=test]{background:#FF0000;}
+
+
+    /*[attr$=value]attr结尾含有value*/
+    .list-11>li[class$=test]{background:#FF0000;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>CSS3高级选择器</h3>
+                <div class="box">
+                    <h1>:nth-child选择器</h1>
+                    <!--list-1-->
+                    <ul class="list list-1">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-1">nth-child(3) 第x个</p>
+                    <p class="answer-1">nth-last-child(8) 倒数第x个</p>
+                    <!--list-2-->
+                    <ul class="list list-2">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-2">nth-child(2n) 2n=0,2,4...（偶数）</p>
+                    <p class="answer-2">nth-child(even) 偶数</p>
+                    <p class="answer-2">nth-last-child(odd) 倒数奇数</p>
+                    <!--list-3-->
+                    <ul class="list list-3">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-3">nth-child(2n+1) 偶数+1（奇数）</p>
+                    <p class="answer-3">nth-child(odd) 奇数</p>
+                    <p class="answer-3">nth-last-child(even) 倒数偶数</p>
+                    <!--list-4-->
+                    <ul class="list list-4">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-4">nth-child(3n+2)</p>
+                    <p class="answer-4">xn+y 以x个划分，第y个</p>
+                    <!--list-5-->
+                    <ul class="list list-5">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-5">nth-child(n+6) 从6开始</p>
+                    <p class="answer-5">nth-last-child(-n+5) 倒数1,2,3...</p>
+                    <!--list-6-->
+                    <ul class="list list-6">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-6">nth-child(-n+5) 5以内</p>
+                    <p class="answer-6">nth-last-child(n+6) 倒数6,7,8...</p>
+                    <!--list-6-->
+                    <ul class="list list-7">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                    <p class="answer-7">nth-child(n+3) nth-child(-n+7)</p>
+                    <p class="answer-7">n+3 从3开始 -n+7 7以内</p>
+                    <p class="answer-7">即3-7</p>
+
+                    <h1>[attr=value]属性选择器</h1>
+                    <!--list-8-->
+                    <ul class="list list-8">
+                        <li>1</li>
+                        <li>2</li>
+                        <li class="test">3</li>
+                        <li class="test">4</li>
+                        <li class="testaa">5</li>
+                        <li class="testaa">6</li>
+                        <li class="aatest">7</li>
+                        <li class="aatest">8</li>
+                        <li class="atesta">9</li>
+                        <li class="atesta">10</li>
+                    </ul>
+                    <p> 1-2无class,3-4class=test<br>
+                        5-6class=testaa,7-8class=aatest<br>
+                        9-10class=atesta</p>
+                    <p class="answer-8">[attr*=value]</p>
+                    <p class="answer-8">attr中含有value</p>
+                    <!--list-9-->
+                    <ul class="list list-9">
+                        <li>1</li>
+                        <li>2</li>
+                        <li class="test">3</li>
+                        <li class="test">4</li>
+                        <li class="testaa">5</li>
+                        <li class="testaa">6</li>
+                        <li class="aatest">7</li>
+                        <li class="aatest">8</li>
+                        <li class="atesta">9</li>
+                        <li class="atesta">10</li>
+                    </ul>
+                    <p>
+                        1-2无class,3-4class=test<br>
+                        5-6class=testaa,7-8class=aatest<br>
+                        9-10class=atesta</p>
+                    <p class="answer-9">[attr*=value]</p>
+                    <p class="answer-9">attr中含有value</p>
+                    <!--list-10-->
+                    <ul class="list list-10">
+                        <li>1</li>
+                        <li>2</li>
+                        <li class="test">3</li>
+                        <li class="test">4</li>
+                        <li class="testaa">5</li>
+                        <li class="testaa">6</li>
+                        <li class="aatest">7</li>
+                        <li class="aatest">8</li>
+                        <li class="atesta">9</li>
+                        <li class="atesta">10</li>
+                    </ul>
+                    <p>
+                        1-2无class,3-4class=test<br>
+                        5-6class=testaa,7-8class=aatest<br>
+                        9-10class=atesta</p>
+                    <p class="answer-10">[attr^=value]</p>
+                    <p class="answer-10">attr开头含有value</p>
+                    <!--list-11-->
+                    <ul class="list list-11">
+                        <li>1</li>
+                        <li>2</li>
+                        <li class="test">3</li>
+                        <li class="test">4</li>
+                        <li class="testaa">5</li>
+                        <li class="testaa">6</li>
+                        <li class="aatest">7</li>
+                        <li class="aatest">8</li>
+                        <li class="atesta">9</li>
+                        <li class="atesta">10</li>
+                    </ul>
+                    <p>
+                        1-2无class,3-4class=test<br>
+                        5-6class=testaa,7-8class=aatest<br>
+                        9-10class=atesta</p>
+                    <p class="answer-11">[attr$=value]</p>
+                    <p class="answer-11">attr结尾含有value</p>
+                </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

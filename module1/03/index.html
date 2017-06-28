@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>关键字过滤</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style type="text/css" id="cssCode">
+        h4{
+            font-weight: bold;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>关键字过滤</h3>
+            <form onsubmit="return false">
+               <label>
+                   <textarea id="msg" placeholder="女|诱惑|色 这些词语会被过滤"></textarea>
+               </label>
+               <button id="btn">过滤</button>
+               <h4>过滤输出内容：</h4>
+               <p id="msg1">
+
+               </p>
+            </form>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-*">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-*">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script id="jsCode">
+var msg = document.getElementById('msg'),
+    msg1 = document.getElementById('msg1'),
+    btn = document.getElementById('btn'),
+    key = /女|诱惑|色/g,
+    msgValue = '';
+btn.onclick=function() {
+    msgValue = msg.value;
+    if(msgValue!=""){
+         msg1.innerHTML = msgValue.replace(key, function(str){
+            var r = '';
+            for(var i = 0; i < str.length; i++){
+                r += '*';
+            }
+            return r;
+        });
+        return false;
+    }else{
+        str = '<span class="error">过滤内容为空</span>';
+        msg1.innerHTML = str;
+    }
+}
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

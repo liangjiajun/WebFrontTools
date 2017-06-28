@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>纯CSS轮播图</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        body{
+            width: 600px;
+            margin:0 auto;
+            padding:5% 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .carousel {
+            position: relative;
+        }
+        .carousel>input{
+            display:none;
+        }
+        .carousel-insider{
+            width:600px;
+            height:500px;
+            overflow: hidden;
+            position:relative;
+            border-radius:6px;
+        }
+        .carousel-insider .item{
+            position:absolute;
+            width:100%;
+            height:100%;
+            font-size: 60px;
+            animation-iteration-count:infinite;
+            animation-duration:10s;
+        }
+        .item1{
+            animation-name:run1;
+            left:0;
+        }
+        .item2{
+            animation-name:run2;
+            left:100%;
+        }
+        .item3{
+            animation-name:run3;
+            left:200%;
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 40px;
+            left: 20%;
+        }
+        .carousel-indicators label {
+            display: inline-block;
+            width: 80px;
+            height: 5px;
+            cursor:pointer;
+        }
+        .carousel-indicators label:nth-child(1){
+            animation:run1 10s infinite;
+        }
+        .carousel-indicators label:nth-child(2){
+            animation:run2 10s infinite;
+        }
+        .carousel-indicators label:nth-child(3){
+            animation:run3 10s infinite;
+        }
+        #flag2:checked ~ .carousel-insider .item2,
+        #flag2:checked ~ .carousel-indicators label:nth-child(2){
+            animation-name:run1;
+        }
+        #flag2:checked ~ .carousel-insider .item1,
+        #flag2:checked ~ .carousel-indicators label:nth-child(1){
+            animation-name:run3;
+        }
+        #flag2:checked ~ .carousel-insider .item3,
+        #flag2:checked ~ .carousel-indicators label:nth-child(3){
+            animation-name:run2;
+        }
+        #flag3:checked ~ .carousel-insider .item3,
+        #flag3:checked ~ .carousel-indicators label:nth-child(3){
+            animation-name:run1;
+        }
+        #flag3:checked ~ .carousel-insider .item1,
+        #flag3:checked ~ .carousel-indicators label:nth-child(1){
+            animation-name:run2;
+        }
+        #flag3:checked ~ .carousel-insider .item2,
+        #flag3:checked ~ .carousel-indicators label:nth-child(2){
+            animation-name:run3;
+        }
+        @keyframes run1{
+            0%,23%,100%{left:0;
+            background: #4cd836;}
+            33%,56%{left:-100%;background-color:rgba(8,8,8,.2)}
+            66%,90%{left:-200%;background-color:rgba(8,8,8,.2)}
+        }
+        @keyframes run2{
+            0%,23%,100%{left:100%;background-color:rgba(8,8,8,.2)}
+            33%,56%{left:0%;background-color:#fafafa;}
+            66%,90%{left:-100%;background-color:rgba(8,8,8,.2)}
+        }
+        @keyframes run3{
+            0%,23%,100%{left:200%;background-color:rgba(8,8,8,.2)}
+            33%,56%{left:100%;background-color:rgba(8,8,8,.2)}
+            66%,90%{left:0%;background-color:#4cd836;}
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>纯CSS轮播图</h3>
+            <div class="carousel">
+                <input type="radio" name="carousel" id="flag1">
+                <input type="radio" name="carousel" id="flag2">
+                <input type="radio" name="carousel" id="flag3">
+
+                <div class="carousel-insider">
+                    <div class="item item1">1</div>
+                    <div class="item item2">2</div>
+                    <div class="item item3">3</div>
+                </div>
+
+                <div class="carousel-indicators">
+                    <label for="flag1"></label>
+                    <label for="flag2"></label>
+                    <label for="flag3"></label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-*">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-*">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script id="jsCode">
+(function(){
+    var formArea = document.getElementById('form'),
+        formInput = formArea.getElementsByTagName('input');
+    for(var i =0;i<formInput.length;i++){
+        formInput[i].oncopy = formInput[i].onpaste = function(){
+            return false;
+        }
+    }
+}())
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

@@ -1,0 +1,111 @@
+
+*{box-sizing:border-box;}
+.wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.error{color:red;}
+.activeArea,
+.codeArea{
+    width: 50%;
+    height: inherit;
+    float: left;
+}
+/* code show area */
+.codeHideBtn{
+    font-size: 16px;
+    font-family: "SimHei";
+    color:#ccc;
+    position: fixed;
+    top:0%;
+    left: 50%;
+    height: 100%;
+    line-height: 60;
+    width: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition:all .5s;
+}
+.codeHideBtn:hover{
+    color:#fff;
+    background: #ccc;
+}
+.codeArea{border-left: 15px solid  #ececec;}
+.codeArea div pre{
+    overflow-y:scroll;
+    height: 87%;
+}
+.codeArea div{
+    position: relative;
+    width: 100%;
+    height: 33.333%;
+    border-bottom: 5px solid #ececec;
+    overflow: hidden;
+}
+.codeArea div h3{
+    color:#7f7f7f;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 20px;
+    border-bottom: 1px solid  #ececec;
+    box-shadow:0 0 5px #e8e8e8;
+    background: #fff;
+    position: relative;
+}
+
+/* from input area */
+.justifyAuto{
+    width:650px;
+    margin: 100px auto 0;
+}
+.justifyAuto h3{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #646464;
+}
+.justifyAuto input,
+.justifyAuto textarea,
+.justifyAuto select{
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    height: 35px;
+    text-indent: 15px;
+    margin: 20px 0;
+    font-size: 16px;
+}
+.justifyAuto input[type='checkbox']{
+    display: inline-block;
+    width: 30%;
+    height: 15px;
+    margin: 10px 0;
+}
+.justifyAuto textarea{
+    padding: 5px;
+    min-height:100px;
+    resize:none;
+}
+.justifyAuto button{
+    border:0;
+    background: #4cd836;
+    height: 35px;
+    border-radius: 5px;
+    color:#fff;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+.justifyAuto button:hover{background:#34af21; }
+.justifyAuto select:focus,
+.justifyAuto textarea:focus,
+.justifyAuto input:focus{
+    outline: 0;
+    border-color: #66afe9;
+    -webkit-box-shadow: inset 0 1px 1px rgba(134,244,187,.075), 0 0 8px rgba(141,217,232,.6);
+        box-shadow: inset 0 1px 1px rgba(134,244,187,.075), 0 0 8px rgba(141,217,232,.6);
+ }

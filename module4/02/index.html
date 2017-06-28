@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单内容转为标签</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        .wrap1 {
+            margin: 150px auto;
+            border: 1px solid #ccc;
+            width: 600px;
+            line-height: 50px;
+            padding-left: 10px;
+        }
+        .tag {
+            border-radius: 12px;
+            background-color: #b5e0fb;
+            padding: 0 10px 2px 10px;
+            margin: 0 5px;
+        }
+        .tag a {
+            margin-left: 5px;
+            font: 18px/20px "times new roman";
+            cursor: pointer;
+        }
+        input {
+            border: none;
+            outline: none;
+            padding: 0 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>表单内容转为标签</h3>
+           <div class="wrap1">
+                <span class="tag-show"></span>
+                <input type="text" class="enter" placeholder="请输入标签">
+           </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+        tag(".enter",".tag-show");
+    function tag(input,show){
+        var input = document.querySelector(input);
+        var show = document.querySelector(show);
+        input.onkeyup = function(e){
+            switch(e.keyCode){
+                case 13:
+                    if(input.value!=""){
+                        if(tags(input.value)!=false){
+                            var tag = '<span class="tag">\
+                                            <span>' + input.value + '</span>\
+                                            <a href="javascript:;">×</a>\
+                                        </span>';
+                            show.innerHTML += tag;
+                            input.value="";
+                        }
+                    }
+                break;
+                case 8:
+                    if(show.children.length){
+                        show.removeChild(show.children[show.children.length-1]);
+                    }
+                break;
+            }
+        }
+        function tags(text){
+            var showChild = show.children;
+            if(showChild.length==0){return true;}
+            for(var i=0;i<showChild.length;i++){
+                var tagText = showChild[i].querySelector("span");
+                if(text == tagText.textContent){
+                    return false;
+                }
+            }
+        }
+        show.addEventListener("click",function(e){
+            if(e.target.localName=="a"){
+                show.removeChild(e.target.parentNode);
+            }
+        },true);
+    }
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

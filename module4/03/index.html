@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS放大镜</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+       .out {
+        position: relative;
+        padding: 50px 0 0 50px;
+       }
+       #min {
+        width: 350px;
+        height: 350px;
+        overflow: hidden;
+        position: relative;
+        cursor: move;
+        float: left;
+        border: 1px solid red;
+       }
+       #minimg {
+        width: 350px;
+        height: 350px;
+        display: block;
+       }
+       #max {
+        width: 400px;
+        height: 400px;
+        border: 1px solid green;
+        overflow: hidden;
+        position: absolute;
+        left: 412px;
+        display: none;
+       }
+       #maximg {
+        width: 800px;
+        height: 800px;
+        position: absolute;
+       }
+       #mask {
+        width: 175px;
+        height: 175px;
+        position: absolute;
+        background: yellow;
+        top: 0;
+        left: 0;
+        opacity: .4;
+        display: none;
+       }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>JS放大镜</h3>
+            <div class="out">
+                <div id="min">
+                    <img src="min.jpg" alt="min" id="minimg">
+                    <div id="mask"></div>
+                </div>
+                <div id="max">
+                    <img src="max.jpg" alt="max" id="maximg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+var min=document.getElementById('min');
+var minimg=document.getElementById('minimg');
+var max=document.getElementById('max');
+var maximg=document.getElementById('maximg');
+var mask=document.getElementById('mask');
+
+min.onmousemove=function(ev){
+
+    mask.style.display="block";
+    max.style.display="block";
+
+    // mask的定位值
+    var maskL=ev.clientX-min.offsetLeft-mask.offsetWidth/2;
+    var maskT=ev.clientY-min.offsetTop-mask.offsetHeight/2;
+
+    // 水平和垂直方向的最大值
+    var maxmoveX=min.offsetWidth-mask.offsetWidth;
+    var maxmoveY=min.offsetHeight-mask.offsetHeight;
+    // 让mask固定在min范围内
+    if(maskL<=0){
+        maskL=0;
+    }else if(maskL>=maxmoveX){
+        maskL=maxmoveX;
+    }
+    if(maskT<=0){
+        maskT=0;
+    }else if(maskT>=maxmoveY){
+        maskT=maxmoveY;
+    }
+    mask.style.top=maskT+'px';
+    mask.style.left=maskL+'px';
+    // 放大效果
+    var scale=maximg.offsetWidth/minimg.offsetWidth;
+    maximg.style.left=-maskL*scale+'px';
+    maximg.style.top=-maskT*scale+'px';
+    console.log(-maskT*scale+'px');
+
+}
+
+min.onmouseout=function(){
+    mask.style.display="none";
+    max.style.display="none";
+}
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

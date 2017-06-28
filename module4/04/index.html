@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度关键词联想</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        .box{
+            width: 490px;
+            height: 30px;
+            margin: 0 auto;
+            position: relative;
+        }
+        #list {
+            width: 490px;
+            position: absolute;
+            top: 33px;
+            left: 0;
+        }
+        #list li {
+            font-size: 16px;
+            padding: 0 10px;
+            line-height: 30px;
+            background: #f4f4f4;
+            cursor: pointer;
+        }
+        #list li:hover {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>百度关键词联想</h3>
+            <div class="box">
+                <input type="text" value="" id="txt">
+                <ul id="list"></ul>
+            </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+    var c1=document.getElementById('txt');
+    var c2=document.getElementById('list');
+
+    c1.oninput=function(){
+        var script=document.createElement('script');
+
+        var url='http://suggestion.baidu.com/su?cb=wenzi&wd='+c1.value+'&_='+new Date().getTime();
+        script.src=url;
+        document.body.appendChild(script);
+    }
+    function wenzi(ev){
+        c2.innerHTML='';
+        for(var i=0;i<ev.s.length;i++){
+            c2.innerHTML+='<li>'+ev.s[i]+'</li>';
+        }
+    }
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>
