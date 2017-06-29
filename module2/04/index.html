@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮换图片-整个翻页</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        .wrapper{
+            width: 700px;
+            height: 300px;
+            margin: 50px auto;
+            border:1px solid #ccc;
+            position: relative;
+        }
+        .inner{
+            width: 700px;
+            height: 300px;
+            overflow: hidden;
+
+        }
+        #box{
+            width: 5000px;
+            position: relative;
+            left: 0px;
+        }
+        #box ul{
+           width: 700px;
+            height: 300px;
+           overflow: hidden;
+           clear: both;
+           display: inline-block;
+        }
+        #box ul li{
+            width: 18%;
+            line-height: 250px;
+            margin:25px 1% 0;
+            float: left;
+            font-size: 30px;
+            text-align: center;
+            background: #cfb;
+        }
+        #ico{
+            position: absolute;
+            top: -30px;
+            right: 0;
+        }
+        .page{
+           width: 10px;
+           height: 10px;
+           display: inline-block;
+           background: #ccc;
+           border-radius: 50%;
+        }
+        .on{background: #0a8cd2;}
+        .banner-left-btn,
+        .banner-right-btn{
+            width: 40px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 5px;
+            opacity: .5;
+            background: #000;
+            display: block;
+            color:#fff;
+            font-size: 40px;
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            cursor: pointer;
+        }
+        .banner-left-btn{left: -20px;}
+        .banner-right-btn{right: -20px;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>轮换图片-整个翻页</h3>
+            <div class="wrapper">
+                <div id="ico">
+                    <a href="javascript:;" class="page on"></a>
+                    <a href="javascript:;" class="page"></a>
+                </div>
+
+                <div class="inner">
+                    <div id="box">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                        </ul>
+                        <ul>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                            <li>9</li>
+                            <li>10</li>
+                        </ul>
+                    </div>
+                </div>
+                <a id="prev" class="banner-left-btn">&lt;</a>
+                <a id="next" class="banner-right-btn">&gt;</a>
+            </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script id="jsCode">
+var ico = document.getElementById('ico').getElementsByTagName('a'),
+    prev = document.getElementById('prev'),
+    next = document.getElementById('next'),
+    box = document.getElementById('box'),
+    ul = box.getElementsByTagName('ul'),
+    list = ul[0].getElementsByTagName('li'),
+    ul_w = ul[0].offsetWidth,
+    len = list.length * 2,
+    page = 4,
+    half = (page/2),
+    now = 0,
+    timer = null;
+    box.innerHTML += box.innerHTML;
+
+    timer = setInterval(auto, 3000);
+    function auto(){next.onclick();}
+
+    prev.onclick = function(){
+        if(now > 0){
+            now--;
+        } else {
+            now = half - 1;
+            box.style.left = -(ul_w * half) + 'px';
+        }
+        scroll();
+    }
+    next.onclick = function(){
+        if(now < page - 1){
+            now++;
+        } else {
+            now = half;
+            box.style.left = -(ul_w * (half - 1)) + 'px';
+        }
+        scroll();
+    }
+
+    box.onmouseover = function(){clearInterval(timer); }
+    box.onmouseout = function(){timer = setInterval(auto, 3000);}
+
+    function scroll(){
+        act(box,'left',-ul_w * (now));
+        tab();
+    }
+
+    /*小图标的状态*/
+    function tab(){
+        for(var i = 0; i < ico.length; i++){
+            ico[i].className = 'page';
+        }
+        ico[now % 2].className = 'page on';
+    }
+    /*获取元素的style*/
+       function css(obj, attr){
+           return obj.currentStyle ? obj.currentStyle[attr] :  getComputedStyle(obj, false)[attr];
+       }
+    /*轮播的移动动作*/
+   function act(obj, attr, target, fn){
+       obj.timer && clearInterval(obj.timer);
+       obj.timer = setInterval(function(){
+           var cur = parseInt(css(obj, attr));
+           var speed = (target - cur) / 8;
+           speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+           if(target != cur){
+               obj.style[attr] = speed + cur + 'px';
+           }
+       }, 30);
+   }
+
+
+
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>
