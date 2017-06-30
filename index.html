@@ -14,49 +14,7 @@
                 <h3>前端效果</h3>
             </div>
         </div><!-- /header -->
-        <ul class="items" id="items">
-            <li>
-                <h2>
-                    <a href="javascript:;">常用表单效果</a>
-                </h2>
-                <dl class="hide">
-                    <dd>
-                        <a href="#">1、asdf</a>
-                    </dd>
-                </dl>
-            </li>
-            <li>
-                <h2>
-                    <a href="javascript:;">JavaScript效果</a>
-                </h2>
-                <dl class="hide">
-                    <dd>
-                        <a href="#">1、asdf</a>
-                    </dd>
-                </dl>
-            </li>
-            <li>
-                <h2>
-                    <a href="javascript:;">CSS效果</a>
-                </h2>
-                <dl class="hide">
-                    <dd>
-                        <a href="#">1、asdf</a>
-                    </dd>
-                </dl>
-            </li>
-            <li>
-                <h2>
-                    <a href="javascript:;">效率手册</a>
-                </h2>
-                <dl class="hide">
-                    <dd>
-                        <a href="#">1、asdf</a>
-                    </dd>
-                </dl>
-            </li>
-
-        </ul>
+        <ul class="items" id="items"></ul>
 
     </div>
 </body>
@@ -66,11 +24,72 @@
 var list = function () {
     this.open = true;
     this.tmp = -1;
+    this.data = [
+            [
+                { title : '第一章 表单常用代码'},
+                { url : 'module1/01/index.html', title : '禁止选框复制和粘贴' },
+                { url : 'module1/02/index.html', title : 'checkbox多选和反选' },
+                { url : 'module1/03/index.html', title : '关键字过滤' },
+                { url : 'module1/04/index.html', title : '三级联动菜单' },
+                { url : 'module1/04/test.html', title : '三级联动菜单(jq版)' },
+                { url : 'module1/05/index.html', title : '图片上传预览' },
+                { url : 'module1/06/index.html', title : '关键词着色(jq版)' },
+            ],
+            [
+                { title : '第二章 常用图片交互效果'},
+                { url : 'module2/01/index.html', title : '轮换图片-单个滚动' },
+                { url : 'module2/04/index.html', title : '轮换图片-整个翻页' },
+                { url : 'module2/02/index.html', title : '360°轮播图' },
+                { url : 'module2/03/index.html', title : '纯CSS轮播图' },
+            ],
+            [
+                { title : '第三章 CSS3交互效果'},
+                { url : 'module3/01/index.html', title : 'CSS3 绘制各种图形' },
+                { url : 'module3/02/index.html', title : 'CSS3盒子变换' },
+                { url : 'module3/03/index.html', title : 'CSS3高级选择器' },
+                { url : 'module3/04/index.html', title : 'CSS手风琴' },
+                { url : 'module3/05/index.html', title : 'CSS盒子翻转' },
+            ],
+            [
+                { title : '第四章 常用的JavaScript交互效果'},
+                { url : 'module4/01/index.html', title : 'JavaScript 逐字显示' },
+                { url : 'module4/02/index.html', title : '表单内容转为标签' },
+                { url : 'module4/03/index.html', title : 'JavaScript 放大镜' },
+                { url : 'module4/04/index.html', title : '百度关键词联想' },
+                { url : 'module4/05/index.html', title : '碰撞检测' },
+                { url : 'module4/06/index.html', title : '单页面导航点击切换' },
+                { url : 'module4/07/index.html', title : '返回顶部' },
+            ],
+        ];
 }
 
 list.prototype = {
     init:function () {
+        this._list();
         this._listData();
+    },
+    _list:function () {
+        var that = this,
+            dataList = that.data,
+            str ='';
+        var inner = document.getElementById('items');
+
+        for (var i = 0; i < dataList.length; i++) {
+            var items = dataList[i];
+            var sub ='';
+                for (var j = 0; j < items.length; j++) {
+                    var con = items[j];
+                    if(j==0){
+                        sub +='<li><h2><a href="javascript:;">'+con.title+'</a></h2><dl class="hide">';
+                    }else{
+                        sub +='<dd> <a href="'+con.url+'" target="_blank">'+j+'、'+con.title+'</a> </dd>';
+                    }
+                    if(j==items.length - 1){sub +='</dl></li> ';}
+                };
+                str += sub;
+        };
+        inner.innerHTML = str;
+
     },
     _listData:function () {
         var that = this,
@@ -78,13 +97,23 @@ list.prototype = {
             listContent = document.getElementsByTagName('dl');
 
         for (var i = 0; i < listTitle.length; i++) {
-            var listT = listTitle[i];
+            var listT = listTitle[i],
+                that = this;
+            listTitle[i].index = i;
+
             listT.onclick = function () {
                 for(var i = 0;i < listTitle.length; i++){
                     listContent[i].className='hide';
                 }
                 var objData = this.nextElementSibling || this.nextSibling;
-                objData.className = '';
+                if(that.tmp==this.index && that.open){
+                     objData.className = 'hide';
+                     that.open = false;
+                }else{
+                    objData.className = '';
+                    that.open = true;
+                }
+                that.tmp = this.index;
             }
         };
     }

@@ -159,8 +159,8 @@ var ico = document.getElementById('ico').getElementsByTagName('a'),
     timer = null;
     box.innerHTML += box.innerHTML;
 
-    timer = setInterval(auto, 3000);
     function auto(){next.onclick();}
+    timer = setInterval(auto, 3000);
 
     prev.onclick = function(){
         if(now > 0){
@@ -201,7 +201,7 @@ var ico = document.getElementById('ico').getElementsByTagName('a'),
            return obj.currentStyle ? obj.currentStyle[attr] :  getComputedStyle(obj, false)[attr];
        }
     /*轮播的移动动作*/
-   function act(obj, attr, target, fn){
+   function act(obj, attr, target){
        obj.timer && clearInterval(obj.timer);
        obj.timer = setInterval(function(){
            var cur = parseInt(css(obj, attr));
