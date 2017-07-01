@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圣杯布局</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+         body{min-width: 650px;}
+        .left,
+        .middle,
+        .right{
+            position: relative;
+            float: left;
+            height: 130px;
+            color: white;
+            text-align: center;
+        }
+        .container{
+            padding:0 220px 0 200px;
+            overflow: hidden;
+        }
+        .left{
+            margin-left: -100%;
+            left: -200px;
+            width: 200px;
+            background: red;
+        }
+        .right{
+            margin-left: -220px;
+            right: -220px;
+            width: 220px;
+            background: green;
+        }
+        .middle{
+            width: 100%;
+            background: black;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>圣杯布局</h3>
+            <!-- 圣杯布局的HTML结构 -->
+            <div class="container">
+                <!-- middle需要放在前面 -->
+                <div class="middle">Middle</div>
+                <div class="left">Left</div>
+                <div class="right">Right</div>
+            </div>
+            <p>HTML 结构相对简单，但是样式定义就稍微复杂，也是优先加载内容主体。</p>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hover导航高亮跟随</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+      .justifyAuto ul{
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          position: relative;
+          background: #3b3b3b;
+      }
+      .justifyAuto ul p{
+          position: absolute;
+          left: 0;
+          top: 0;
+          background:#8cf77b;
+          opacity: .5;
+          width: 33%;
+          height: 50px;
+          transition: all .5s;
+      }
+      .justifyAuto li{
+          flex: 1;
+          line-height: 50px;
+          text-align: center;
+          color: #fff;
+          z-index: 9;
+          cursor: pointer;
+      }
+      .active{background:#8cf77b;}
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>hover导航高亮跟随</h3>
+            <ul>
+                <p></p>
+                <li class="active">test1</li>
+                <li>test2</li>
+                <li>test3</li>
+            </ul>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+  var Ali = document.querySelectorAll('li'),
+      Dp = document.querySelector('p');
+
+  var navHover={
+      init: function(node,hover){
+          this._obj(node,hover);
+      },
+      _obj:function(node,hover) {
+          [].forEach.call(node,function(obj,i) {
+              obj.onmouseover = function () {
+                  if(this==obj){
+                      console.log(obj.clientWidth);
+                      hover.style.left = obj.clientWidth*i+'px';
+                  }
+              }
+              obj.onclick =function () {
+                  for (var i = 0; i < node.length; i++) {
+                      node[i].className = '';
+                  };
+                  this.className = 'active';
+              }
+          })
+      }
+  }
+  navHover.init(Ali,Dp);
+
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

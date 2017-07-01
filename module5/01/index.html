@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双飞翼布局</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+        body{min-width: 650px;}
+        .sub,
+        .main,
+        .extra{
+            float: left;
+            min-height: 130px;
+            color: white;
+            text-align: center;
+        }
+        .sub{
+            margin-left: -100%;
+            width: 200px;
+            background: red;
+        }
+        .extra{
+            margin-left: -220px;
+            width: 220px;
+            background: blue;
+        }
+        .main{
+            width: 100%;
+        }
+        .main-inner{
+            margin-left: 200px;
+            margin-right: 220px;
+            min-height: 130px;
+            background: green;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>双飞翼布局</h3>
+            <!-- 双飞翼布局的HTML结构 -->
+           <div class="main">
+               <div class="main-inner"> main </div>
+           </div>
+           <div class="sub"> sub </div>
+           <div class="extra"> extra </div>
+        </div>
+        <p>主体内容可以优先加载，HTML 代码结构稍微复杂点。</p>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>
