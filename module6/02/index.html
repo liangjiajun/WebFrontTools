@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隐藏菜单显示</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/iphone.css">
+    <style id="cssCode">
+
+      body {
+        background: #1BBC9B;
+      }
+      .justifyAuto{
+        position: relative;
+      }
+      .nav {
+        position: absolute;
+        z-index: 100;
+        opacity: 0;
+        -webkit-transition-property: all;
+        transition-property: all;
+        -webkit-transition-duration: 300ms;
+                transition-duration: 300ms;
+      }
+      .nav--active .nav {
+        opacity: 1;
+        background-color: #333;
+      }
+      .nav__list {
+        margin: 0;
+        padding: 10px;
+      }
+      .nav__item {
+        list-style-type: none;
+        text-align: left;
+      }
+      .nav__link {
+        font-size: 1.3em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #FFFFFF;
+        opacity: 1;
+        -webkit-transition: opacity 300ms ease-in-out;
+        transition: opacity 300ms ease-in-out;
+      }
+      .nav__trigger {
+        display: block;
+        position: absolute;
+        width: 30px;
+        height: 25px;
+        right: 10px;
+        top: 10px;
+        z-index: 200;
+      }
+      .nav--active .nav__trigger {
+        opacity: 0.5;
+      }
+      .nav__icon {
+        display: inline-block;
+        position: relative;
+        width: 30px;
+        height: 5px;
+        background-color: #FFFFFF;
+        -webkit-transition-property: background-color, -webkit-transform;
+        transition-property: background-color, -webkit-transform;
+        transition-property: background-color, transform;
+        transition-property: background-color, transform, -webkit-transform;
+        -webkit-transition-duration: 300ms;
+                transition-duration: 300ms;
+      }
+      .nav__icon:before,
+      .nav__icon:after {
+        content: '';
+        display: block;
+        width: 30px;
+        height: 5px;
+        position: absolute;
+        background: #FFFFFF;
+        -webkit-transition-property: margin, -webkit-transform;
+        transition-property: margin, -webkit-transform;
+        transition-property: margin, transform;
+        transition-property: margin, transform, -webkit-transform;
+        -webkit-transition-duration: 300ms;
+                transition-duration: 300ms;
+      }
+      .nav__icon:before {
+        margin-top: -10px;
+      }
+      .nav__icon:after {
+        margin-top: 10px;
+      }
+      .style-1 .nav {
+        -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+        width: 100%;
+        height: 100%;
+      }
+      .style-1 .nav__link {
+        opacity: 0;
+        -webkit-transition-delay: 500ms;
+                transition-delay: 500ms;
+      }
+      .style-1 .nav--active .nav__link {
+        opacity: 1;
+      }
+      .style-1 .nav--active .nav {
+        -webkit-transition: all 300ms ease-in-out;
+        transition: all 300ms ease-in-out;
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+      }
+      .style-1 .nav--active .nav__icon {
+        background: rgba(0, 0, 0, 0);
+      }
+      .style-1 .nav--active .nav__icon:before {
+        margin-top: 0;
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+      }
+      .style-1 .nav--active .nav__icon:after {
+        margin-top: 0;
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+      }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>隐藏菜单显示</h3>
+              <div class="iphone style-1">
+                <div class="iphone__power-btn"></div>
+                <div class="iphone__left-btn"></div>
+                <div class="iphone__details"></div>
+                <div class="iphone__screen">
+                  <a href="#" class="nav__trigger">
+                    <span class="nav__icon"></span>
+                  </a>
+                  <nav class="nav">
+                      <ul class="nav__list">
+                        <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+                        <li class="nav__item"><a class="nav__link" href="#">About Us</a></li>
+                        <li class="nav__item"><a class="nav__link" href="#">Portfolio</a></li>
+                        <li class="nav__item"><a class="nav__link" href="#">Blog</a></li>
+                        <li class="nav__item"><a class="nav__link" href="#">Contact Us</a></li>
+                      </ul>
+                      </nav>
+                  <div class="iphone__content"></div>
+                </div>
+                <div class="iphone__home-btn"></div>
+              </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+var Dscreen = document.getElementsByClassName('iphone__screen')[0];
+var open = true;
+Dscreen.onclick = function () {
+  if(open){
+    this.className = 'iphone__screen nav--active';
+    open = false;
+  }else{
+    this.className = 'iphone__screen';
+    open = true;
+  }
+
+}
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>

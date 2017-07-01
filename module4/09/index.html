@@ -2,39 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>双飞翼布局</title>
+    <title>键盘控制方向（斜）</title>
     <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
     <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
     <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
     <style id="cssCode">
-        body{min-width: 650px;}
-        .sub,
-        .main,
-        .extra{
-            float: left;
-            min-height: 130px;
-            color: white;
-            text-align: center;
-        }
-        .sub{
-            margin-left: -100%;
-            width: 200px;
-            background: red;
-        }
-        .extra{
-            margin-left: -220px;
-            width: 220px;
-            background: blue;
-        }
-        .main{
-            width: 100%;
-        }
-        .main-inner{
-            margin-left: 200px;
-            margin-right: 220px;
-            min-height: 130px;
-            background: green;
-        }
+      #div1 {
+        background: red;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 40%;
+        top: 400px;
+        z-index: 999;
+      }
 
     </style>
 </head>
@@ -42,14 +23,8 @@
 <div class="wrap">
     <div class="activeArea" id="activeArea">
         <div class="justifyAuto">
-            <h3>双飞翼布局</h3>
-            <!-- 双飞翼布局的HTML结构 -->
-           <div class="main">
-               <div class="main-inner"> main </div>
-           </div>
-           <div class="sub"> sub </div>
-           <div class="extra"> extra </div>
-        <p>主体内容可以优先加载，HTML 代码结构稍微复杂点。</p>
+            <h3>键盘控制方向（斜方向亦行）</h3>
+            <div id="div1"></div>
         </div>
     </div>
     <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
@@ -90,8 +65,44 @@
 </body>
 </html>
 <script  id="jsCode">
+  var obj=document.getElementById("div1");
+  var objw = document.documentElement.clientWidth - 120;
+  var objh = document.documentElement.clientHeight- 120;
 
+  var flag = {u:false,d:false,l:false,r:false};
 
+  document.onkeydown = function(e){
+    switch(e.keyCode){
+      case 37: flag.l = true; break;
+      case 39:flag.r = true; break;
+      case 38:flag.u = true; break;
+      case 40:flag.d = true; break;
+    }
+  }
+
+  document.onkeyup = function(e){
+    switch(e.keyCode){
+      case 37: flag.l = false;break;
+      case 39:flag.r = false;break;
+      case 38:flag.u = false;break;
+      case 40:flag.d = false;break;
+    }
+  }
+
+  setInterval(function(){
+      if (flag.l){
+        obj.style.left=obj.offsetLeft-20 + "px";
+      }
+      if (flag.r){
+        obj.style.left=obj.offsetLeft+20 + "px";
+      }
+      if (flag.u){
+        obj.style.top=obj.offsetTop-20 + "px";
+      }
+      if (flag.d){
+        obj.style.top=obj.offsetTop+20 + "px";
+      }
+  },100);
 
 
 
