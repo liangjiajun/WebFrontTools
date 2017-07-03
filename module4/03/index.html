@@ -7,47 +7,64 @@
     <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
     <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
     <style id="cssCode">
-       .out {
-        position: relative;
-        padding: 50px 0 0 50px;
+       .demo {
+        width: 350px;
+        margin: 30px;
+        text-align: left;
+        padding: 0;
        }
-       #min {
+
+       #main {
+        position: relative;
+       }
+
+       .small_pic {
         width: 350px;
         height: 350px;
-        overflow: hidden;
         position: relative;
-        cursor: move;
-        float: left;
-        border: 1px solid red;
        }
-       #minimg {
-        width: 350px;
-        height: 350px;
-        display: block;
+       .small_pic img{
+        border:1px solid #ccc;
        }
-       #max {
-        width: 400px;
-        height: 400px;
-        border: 1px solid green;
-        overflow: hidden;
+
+       .float_layer {
+        width: 70px;
+        height: 70px;
+        background: #fff;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 34px, red 0, red 36px, rgba(0, 0, 0, 0) 0),
+            linear-gradient(0deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 34px, red 0, red 36px, rgba(0, 0, 0, 0) 0);
+        opacity: .6;
         position: absolute;
-        left: 412px;
-        display: none;
-       }
-       #maximg {
-        width: 800px;
-        height: 800px;
-        position: absolute;
-       }
-       #mask {
-        width: 175px;
-        height: 175px;
-        position: absolute;
-        background: yellow;
         top: 0;
         left: 0;
-        opacity: .4;
         display: none;
+       }
+
+       .mark {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+        left: 0px;
+        top: 0px;
+        background: red;
+        opacity: 0;
+       }
+
+       .big_pic {
+        position: absolute;
+        top: 0px;
+        left: 360px;
+        width: 350px;
+        height: 350px;
+        overflow: hidden;
+        display: none;
+       }
+
+       .big_pic img {
+        position: absolute;
+        top: -30px;
+        left: -80px;
        }
     </style>
 </head>
@@ -56,13 +73,15 @@
     <div class="activeArea" id="activeArea">
         <div class="justifyAuto">
             <h3>JS放大镜</h3>
-            <div class="out">
-                <div id="min">
-                    <img src="min.jpg" alt="min" id="minimg">
-                    <div id="mask"></div>
+            <div id="main" class="demo">
+                <div class="small_pic">
+                    <span class="mark"></span>
+                    <span class="float_layer"></span>
+                    <img src="min.jpg" alt="放大镜图片" />
                 </div>
-                <div id="max">
-                    <img src="max.jpg" alt="max" id="maximg">
+
+                <div class="big_pic">
+                    <img src="max.jpg" alt="放大镜图片" />
                 </div>
             </div>
         </div>
@@ -105,50 +124,57 @@
 </body>
 </html>
 <script  id="jsCode">
+     (function() {
+        var main = document.getElementById('main');
+        var big = getByCls(main, 'big_pic')[0];
+        var small = getByCls(main, 'small_pic')[0];
+        var img = big.getElementsByTagName('img')[0];
+        var mark = small.getElementsByTagName('span')[0];
+        var layer = small.getElementsByTagName('span')[1];
+        small.onmousemove = function(e) {
+            e = e || event;
+            this.style.cursor = 'move';
+            layer.style.display = big.style.display = 'block';
+            var t = e.clientY - main.offsetTop - layer.clientHeight / 2;
+            var l = e.clientX - main.offsetLeft - layer.clientWidth / 2;
+            if (t < 0) {
+                t = 0;
+            } else if (t > main.clientHeight - layer.clientHeight) {
+                t = main.clientHeight - layer.clientHeight;
+            }
+            if (l < 0) {
+                l = 0;
+            } else if (l > main.clientWidth - layer.clientWidth) {
+                l = main.clientWidth - layer.clientWidth;
+            }
+            var scaleX = l / (main.clientHeight - layer.clientHeight);
+            var scaleY = t / (main.clientWidth - layer.clientWidth);
+            layer.style.top = t + 'px';
+            layer.style.left = l + 'px';
+            img.style.left = -scaleX * (img.clientWidth - big.clientWidth) + 'px';
+            img.style.top = -scaleY * (img.clientHeight - big.clientHeight) + 'px';
+        }
+        small.onmouseout = function(e) {
+            layer.style.display = big.style.display = 'none';
+        }
 
-var min=document.getElementById('min');
-var minimg=document.getElementById('minimg');
-var max=document.getElementById('max');
-var maximg=document.getElementById('maximg');
-var mask=document.getElementById('mask');
+        function getByCls(obj, cls) {
+            if (obj.getElementsByClassName) {
+                return obj.getElementsByClassName(cls);
+            } else {
+                var res = [],
+                    reg = new RegExp('^|\\s+' + cls + '\\s+|$'),
+                    all = obj.all;
+                for (var i = 0; i < all.length; i++) {
+                    if (reg.test(all[i].className)) {
+                        res.push(all[i]);
+                    }
+                }
+                return res;
+            }
+        }
+     }());
 
-min.onmousemove=function(ev){
-
-    mask.style.display="block";
-    max.style.display="block";
-
-    // mask的定位值
-    var maskL=ev.clientX-min.offsetLeft-mask.offsetWidth/2;
-    var maskT=ev.clientY-min.offsetTop-mask.offsetHeight/2;
-
-    // 水平和垂直方向的最大值
-    var maxmoveX=min.offsetWidth-mask.offsetWidth;
-    var maxmoveY=min.offsetHeight-mask.offsetHeight;
-    // 让mask固定在min范围内
-    if(maskL<=0){
-        maskL=0;
-    }else if(maskL>=maxmoveX){
-        maskL=maxmoveX;
-    }
-    if(maskT<=0){
-        maskT=0;
-    }else if(maskT>=maxmoveY){
-        maskT=maxmoveY;
-    }
-    mask.style.top=maskT+'px';
-    mask.style.left=maskL+'px';
-    // 放大效果
-    var scale=maximg.offsetWidth/minimg.offsetWidth;
-    maximg.style.left=-maskL*scale+'px';
-    maximg.style.top=-maskT*scale+'px';
-    console.log(-maskT*scale+'px');
-
-}
-
-min.onmouseout=function(){
-    mask.style.display="none";
-    max.style.display="none";
-}
 
 </script>
 <script src="../../Javascript/prism.js"></script>

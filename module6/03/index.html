@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/iphone.css">
+    <style id="cssCode">
+      body {
+        background: #1BBC9B;
+      }
+      .iphone{
+        left: 25%;
+      }
+      .iphone__screen{
+        background: #1BBC9B;
+        overflow-y: scroll;
+      }
+      #box{
+        width: 14em;
+        margin: 0 auto;
+      }
+
+      #box ul{
+        float: left;
+        width: 3em;
+        margin: 0 .5em;
+      }
+      #box ul li{
+        background: #000;
+        margin-bottom: 20px;
+      }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>瀑布流</h3>
+            <div class="iphone">
+              <div class="iphone__power-btn"></div>
+              <div class="iphone__left-btn"></div>
+              <div class="iphone__details"></div>
+              <div class="iphone__screen">
+                    <div id="box">
+                       <ul></ul>
+                       <ul></ul>
+                       <ul></ul>
+                    </div>
+              </div>
+              <div class="iphone__home-btn"></div>
+            </div>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+   window.onload=function () {
+     var obox=document.getElementById('box');
+     var oul=obox.getElementsByTagName("ul");
+     var vh=document.documentElement.clientHeight;
+     var otop=document.getElementById("top");
+
+
+        //获取最小ul的索引
+    function checkheigh(oul){
+        //初始化
+        var height=100000000;
+        var index=0;
+        for(var a=0; a<oul.length; a++){
+          var now_height = oul[a].offsetHeight;
+          if(now_height<height){
+               height = now_height
+               index=a;
+          }
+        }
+        return index;//返回索引
+    }
+      function rd(n,m){
+          var c = m-n+1;
+          return Math.floor(Math.random() * c + n);
+      }
+
+        //滚动加载
+      window.onscroll=function(){
+           var st=document.documentElement.scrollTop || document.body.scrollTop; //滚动的高度
+           if(st+vh>document.body.scrollHeight-500){
+               createelement();
+           }
+      }
+
+     createelement();
+    function createelement(){
+     for (var i = 1; i <16; i++) {
+      var oli=document.createElement("li");
+        oli.style.height = rd(50,200)+'px';
+         var min_index=checkheigh(oul);
+          oul[min_index].appendChild(oli);
+
+     }
+    }
+
+
+  }
+
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
