@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>横向进度步骤</title>
+    <link rel="stylesheet" type="text/css" href="../../Style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/mold.css">
+    <link rel="stylesheet" type="text/css" href="../../Style/prism.css">
+    <style id="cssCode">
+      ul {
+        --now: orange;
+        --other: orange;
+        --active: #FADBA5;
+      }
+      .step-case {
+        height: 40px;
+        transition: all .5s;
+      }
+      .step-case li {
+        float: left;
+        margin: 0px;
+        width: 30%;
+        position: relative;
+        cursor: pointer;
+      }
+      .step-case li span {
+        display: block;
+        background-color: #ccc;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+      }
+      .step-case b {
+        position: absolute;
+        font-size: 0px;
+        line-height: 0px;
+        top: 0px;
+      }
+      .step-case .b-l {
+        border-width: 2px 2px 2px 0;
+        border-style: dashed solid dashed dashed;
+        border-color: transparent #ccc transparent transparent;
+        height: 36px;
+        left: -2px;
+      }
+      .step-case .b-r {
+        border-width: 2px 0 2px 2px;
+        border-style: dashed dashed dashed solid;
+        border-color: transparent transparent transparent #ccc;
+        height: 36px;
+        right: -2px;
+      }
+      .step-case .b-1 {
+        border-width: 20px 0 20px 20px;
+        border-style: solid dashed solid solid;
+        border-color: #ccc transparent #ccc #ddd;
+        left: -20px;
+      }
+      .step-case .b-2 {
+        border-width: 20px 0 20px 20px;
+        border-style: dashed dashed dashed solid;
+        border-color: transparent transparent transparent #ccc;
+        left: -21px;
+      }
+
+      /*now active*/
+      .step-case .s-cur span {
+        background-color: var(--now);
+      }
+      .step-case .s-cur .b-l {
+        border-right-color: var(--now);
+      }
+      .step-case .s-cur .b-r {
+        border-left-color: var(--now);
+      }
+      .step-case .s-cur .b-1 {
+        border-color: var(--now) var(--now) var(--now) var(--other);
+      }
+      .step-case .s-cur .b-2 {
+        border-left-color: var(--active);
+      }
+
+      /*now active last*/
+      .step-case .s-cur-next .b-2 {
+        border-color: transparent transparent transparent var(--now);
+      }
+
+      /*up active*/
+      .step-case .s-finish span {
+        background-color: var(--active);
+        color: #000;
+      }
+      .step-case .s-finish .b-l {
+        border-right-color: var(--active);
+      }
+      .step-case .s-finish .b-r {
+        border-left-color: var(--active);
+      }
+      .step-case .s-finish .b-1 {
+        border-color: var(--active) var(--active) var(--active) var(--other);
+      }
+      .step-case .s-finish .b-2 {
+        border-left-color: var(--active);
+      }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="activeArea" id="activeArea">
+        <div class="justifyAuto">
+            <h3>横向进度步骤</h3>
+            <ul class="step-case" id="step"> 
+                <li class="s-finish"><span>第1步</span><b class="b-l"></b></li>
+                <li class="s-cur"><span>第2步</span><b class="b-1"></b><b class="b-2"></b></li>
+                <li class="s-cur-next"><span>第3步</span><b class="b-1"></b><b class="b-2"></b></li>
+            </ul>
+        </div>
+    </div>
+    <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
+    <div class="codeArea" id="codeArea">
+        <div class="code-area">
+            <h3>HTML Code </h3>
+            <pre class="language-html">
+                <code>
+                    <textarea disabled  id="htmlArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area">
+            <h3>CSS Code </h3>
+            <pre class="language-css">
+                <code>
+                    <textarea disabled  id="cssArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+        <div class="code-area" >
+            <h3>JavaScript Code </h3>
+            <pre class="language-javascript">
+                <code>
+                    <textarea disabled id="jsArea">
+
+                    </textarea>
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script  id="jsCode">
+
+var step = document.getElementById("step"),
+    li = step.getElementsByTagName("li");
+for(var i = 0;i<li.length;i++){
+    (function(i){
+        li[i].index = i;
+        li[i].onclick = function(){
+            var i = this.index;
+            for(var j = 0;j<i;j++){
+                li[j].className = "s-finish";
+            }
+            for(var j = li.length;j>i;){
+                li[--j].className = "";
+                if(j==i+1){
+                    li[j].className = "s-cur-next";
+                }
+            }
+            this.className = "s-cur";
+        }
+
+    })(i);
+}
+
+
+</script>
+<script src="../../Javascript/prism.js"></script>
+<script src="../../Javascript/mold.js"></script>
