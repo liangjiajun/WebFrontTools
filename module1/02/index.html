@@ -26,6 +26,26 @@
                 <p><label><input name="obj" type="checkbox">选项九</label></p>
                 <p><label><input name="obj" type="checkbox">选项十</label></p>
             </form>
+            <ul>
+              <li>
+                <input type="checkbox" name="short" id="short">
+                <label for="short">Short Things</label>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="short-1" id="short-1">
+                    <label for="short-1">Smurfs</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="short-2" id="short-2">
+                    <label for="short-2">Mushrooms</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="short-3" id="short-3">
+                    <label for="short-3">One Sandwich</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
         </div>
     </div>
     <span class="codeHideBtn" id="codeHideBtn">&gt;</span>
@@ -79,7 +99,7 @@ var each = function (arr,callback) {
     return arr;
 }
 allInput.onclick = function () {
-    if(allInput.checked==true){
+    if(allInput.checked || allInput.indeterminate){
         each(check,function (i) {
             check[i].checked = true;
         })
@@ -89,6 +109,13 @@ allInput.onclick = function () {
         })
     }
 }
+each(check,function(i){
+   check[i].onclick = function() {
+       if(!this.checked){
+          allInput.indeterminate = true;  
+       }
+   }
+})
 
 
 
